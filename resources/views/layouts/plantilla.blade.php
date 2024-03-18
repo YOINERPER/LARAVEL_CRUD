@@ -11,7 +11,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="w-full h-screen">
+<body class="w-full h-screen flex flex-col justify-between">
     <nav class="w-full h-16  md:lg:h-16  bg-[#24252A] flex  justify-between">
         <div class="h-full lg:w-1/3 md:w-1/3 sm:w-full flex items-center justify-start  ps-4">
             <div class="  rounded-full w-14 h-14 border-2 border-[#0089A6]">
@@ -38,7 +38,7 @@
         </div>
     </nav>
 
-    <section class="w-full h-4/5 sm:h-3/4 md:lg:h-4/5 flex justify-center items-center">
+    <section class="w-full h-full sm:h-3/4 md:lg:h-4/5 flex justify-center items-center pb-5">
         @yield('main')
 
         
@@ -46,7 +46,7 @@
     </section>
 
     
-    <footer class="w-full h-20 md:lg:h-14 bg-[#24252A]">
+    <footer class="w-full h-10 md:lg:h-10 bg-[#24252A]">
         <div class="w-full h-full flex items-center justify-center">
             <span class="text-white font-sans">@ by Yoiner Pertuz 2024</span>
 

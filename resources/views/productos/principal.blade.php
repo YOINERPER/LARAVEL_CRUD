@@ -6,8 +6,8 @@
 
 @section('main')
 
-    <div class="w-auto h-full py-10 px-20 overflow-auto">
-        <table class="table-auto">
+    <div class="w-auto h-full py-10 px-20 ">
+        <table class="table-auto w-full h-full">
             <thead class=" text-md text-gray-700 uppercase bg-gray-50 dark:bg-[#24252A] dark:text-white">
                 <tr class=" border-y border-[#bbb8b8c4] shadow-sm">
                     <th>Codigo</th>
