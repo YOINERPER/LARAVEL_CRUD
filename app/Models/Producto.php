@@ -12,4 +12,9 @@ class Producto extends Model
     public function categorias(){
         return $this->belongsToMany(Categoria::class);
     }
+
+    //se activa la opcion de assignacion masiva para que deje crear registros
+    
+
+    protected $guarded = [];
 }

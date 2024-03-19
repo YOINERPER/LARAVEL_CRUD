@@ -4,9 +4,11 @@
 
 @section('usu_rol', session('rol_name'))
 
+
 @section('main')
 
-    <div class="w-auto h-full py-10 px-20 ">
+    <div class="w-auto h-full py-10 px-20 flex flex-col ">
+        <a href="{{url('products/create')}}" class="bg-[#0089A6] text-white mx-1 py-1 px-2 rounded-md w-24 text-center mb-2">Add New</a>
         <table class="table-auto w-full h-full">
             <thead class=" text-md text-gray-700 uppercase bg-gray-50 dark:bg-[#24252A] dark:text-white">
                 <tr class=" border-y border-[#bbb8b8c4] shadow-sm">
@@ -27,14 +29,15 @@
                         <td class="  h-10">{{ $producto->prod_precio }}</td>
                         <td class=" w-1/4 h-10">{{ $producto->cat_nombre }}</td>
                         <td class="flex items-center justify-center pt-2 h-10">
-                            <a href="" class="bg-[#0089A6] text-white mx-1 py-1 px-2 rounded-md"><i
+                            <a href="{{url('/products/edit/'.$producto->prod_uid)}}" class="bg-[#0089A6] text-white mx-1 py-1 px-2 rounded-md"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
-                            <form action="" method="POST">
+                            <form onsubmit="return false">
                                 @csrf
-                                @method('DELETE')
-                                <button class="bg-red-500 text-white py-1 mx-1 px-2 rounded-md" type="submit"><i
-                                        class="fa-solid fa-trash"></i></button>
+                                <button onclick="deleteProd({{$producto->prod_uid}},this)" class="bg-red-500 text-white py-1 mx-1 px-2 rounded-md" type="submit"><i
+                                    class="fa-solid fa-trash"></i></button>
                             </form>
+                            
+
                         </td>
                     </tr>
                 @endforeach
@@ -46,9 +49,6 @@
         </div>
 
     </div>
-
-
-
-
+    
 
 @endsection

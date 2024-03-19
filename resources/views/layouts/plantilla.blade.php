@@ -8,10 +8,12 @@
     <title>Document</title>
     <script src="https://kit.fontawesome.com/004f8ccfaf.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css','resources/js/app.js'])
+    
 </head>
 
 <body class="w-full h-screen flex flex-col justify-between">
+
     <nav class="w-full h-16  md:lg:h-16  bg-[#24252A] flex  justify-between">
         <div class="h-full lg:w-1/3 md:w-1/3 sm:w-full flex items-center justify-start  ps-4">
             <div class="  rounded-full w-14 h-14 border-2 border-[#0089A6]">
@@ -26,8 +28,8 @@
 
         </div>
         <div class="h-full lg:w-1/3  md:w-1/3 sm:w-0 md:flex lg:flex  items-center justify-center  hidden sm:flex">
-            <div class="w-full h-auto flex items-center rounded-full bg-white p-1">
-                <i class="fa-solid fa-magnifying-glass pl-2 bg-white w-25 "></i>
+            <div class="w-full h-auto flex items-center justify-start rounded-full bg-white p-1">
+                <i class="fa-solid fa-magnifying-glass pl-2 bg-white "></i>
                 <input class="pl-4 w-full h-full border-0 focus:outline-none" type="text" placeholder="Search">
             </div>
 
@@ -54,6 +56,8 @@
 
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
