@@ -22,7 +22,7 @@ class UsuarioFactory extends Factory
             'last_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => sha1("1234567890"),
-            'role_id' => $this->faker->randomElement([1,2]),
+            'role_id' => $this->faker->randomElement([1,2,3]),
         ];
     }
 }

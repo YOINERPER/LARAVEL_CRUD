@@ -14,7 +14,7 @@
 
 <body class="w-full h-screen flex flex-col justify-between">
 
-    <nav class="w-full h-16  md:lg:h-16  bg-[#24252A] flex  justify-between">
+    <nav class="w-full h-16  md:lg:h-16  bg-[#24252A] flex items-center   justify-between">
         <div class="h-full lg:w-1/3 md:w-1/3 sm:w-full flex items-center justify-start  ps-4">
             <div class="  rounded-full w-14 h-14 border-2 border-[#0089A6]">
                 <img class="rounded-full h-full w-full  "
@@ -26,6 +26,9 @@
                 <span class=" text-[#0089A6]">@yield('usu_rol')</span>
             </div>
 
+        </div>
+        <div>
+            <a href="{{url('principal')}}" class=" text-white mx-1 py-1 px-2 rounded-md " >Inicio</a>
         </div>
         <div class="h-full lg:w-1/3  md:w-1/3 sm:w-0 md:flex lg:flex  items-center justify-center  hidden sm:flex">
             <div class="w-full h-auto flex items-center justify-start rounded-full bg-white p-1">

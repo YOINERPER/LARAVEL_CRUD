@@ -33,7 +33,7 @@
                                     class="fa-solid fa-pen-to-square"></i></a>
                             <form onsubmit="return false">
                                 @csrf
-                                <button onclick="deleteProd({{$producto->prod_uid}},this)" class="bg-red-500 text-white py-1 mx-1 px-2 rounded-md" type="submit"><i
+                                <button onclick="deleteProd({{$producto->prod_uid}},this,'products')" class="bg-red-500 text-white py-1 mx-1 px-2 rounded-md" type="submit"><i
                                     class="fa-solid fa-trash"></i></button>
                             </form>
                             

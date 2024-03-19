@@ -17,33 +17,38 @@
                     <label for="first_name" class="block mb-2 text-xl font-medium text-gray-900 ">Code:</label>
                     <input name="prod_codigo" type="text" id="prod_codigo"
                         class=" bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
-                        required />
+                        required value="{{old('prod_codigo')}}" />
+                        @error('prod_codigo') {{$mensaje}} @enderror
                 </div>
                 <div>
                     <label for="first_name" class="block mb-2 text-xl font-medium text-gray-900 ">Name:</label>
                     <input name="prod_nombre" type="text" id="prod_nombre"
                         class=" bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
-                        required />
+                        required value="{{old('prod_nombre')}}"/>
+                        @error('prod_nombre') {{$mensaje}} @enderror
                 </div>
                 <div>
                     <label for="first_name" class="block mb-2 text-xl font-medium text-gray-900 ">Price:</label>
                     <input name="prod_precio" type="number" id="prod_precio"
                         class=" bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
-                        required />
+                        required value="{{old('prod_precio')}}"/>
+                        @error('prod_precio') {{$mensaje}} @enderror
                 </div>
                 <div>
                     <label for="first_name" class="block mb-2 text-xl font-medium text-gray-900 ">Description:</label>
                     <input name="prod_descripcion" type="text" id="prod_descripcion"
                         class=" bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
-                        required />
+                        required value="{{old('prod_descripcion')}}"/>
+                        @error('prod_descripcion') {{$mensaje}} @enderror
                 </div>
                 <div>
-                    <select name="prod_categoria" class="rounded-lg block w-full p-2.5" id="prod_categoria" required>
+                    <select name="prod_categoria" class="rounded-lg block w-full p-2.5" id="prod_categoria" value="{{old('prod_categoria')}}" required>
                         @foreach ($categorias as $cat)
                             <option value="{{$cat->id}}">{{$cat->cat_nombre}}</option>
                         @endforeach
 
                     </select>
+                    @error('prod_categoria') {{$mensaje}} @enderror
                 </div>
 
 

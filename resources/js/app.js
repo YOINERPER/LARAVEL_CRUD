@@ -1,4 +1,4 @@
-window.deleteProd = (id_prod, row)=>{
+window.deleteProd = (id_prod, row,controller)=>{
     Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -10,7 +10,7 @@ window.deleteProd = (id_prod, row)=>{
       }).then((result) => {
 
         if (result.isConfirmed) {
-            deleteProds(id_prod, row)
+            deleteProds(id_prod, row,controller)
         //   Swal.fire({
         //     title: "Deleted!",
         //     text: "Your file has been deleted.",
@@ -21,8 +21,8 @@ window.deleteProd = (id_prod, row)=>{
 }
 
 //eliminar productos accion
-window.deleteProds = async (id_prod, row)=>{
-    const url='products/'+id_prod;
+window.deleteProds = async (id_prod, row , controller)=>{
+    const url=controller+'/'+id_prod;
     const csfrToken = document.querySelector('input[name="_token"]').value;
     await fetch(url, {
         method: 'DELETE',
@@ -100,15 +100,15 @@ window.CreateProd = ()=>{
             timer: 2000
           });
 
-          redirigirVistaProd();
+          redirigirVistaProd('/LARAVEL_CRUD/public/products');
       });
      
     }
 }
 
-const redirigirVistaProd = ()=>{
+const redirigirVistaProd = (url)=>{
     setTimeout(()=>{
-        location.href = '/laravel/public/products';
+        location.href = url;
     },2500)
 }
 
@@ -160,7 +160,118 @@ window.UpdateProd = ()=>{
             timer: 2000
           });
 
-          redirigirVistaProd();
+          redirigirVistaProd('/LARAVEL_CRUD/public/products');
+      });
+
+      
+     
+    }
+}
+
+//crear productos
+window.CreateUser = ()=>{
+
+    //datos
+    const name = document.getElementById('name').value;
+    const last_name = document.getElementById('last_name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const role_id = document.getElementById('role_id').value;
+    const csfrToken = document.querySelector('input[name="_token"]').value;
+
+    console.log(name,last_name,email,password,role_id);
+
+    //validacion
+    if(name.trim() == '' || last_name.trim() == '' || email.trim() == '' || password.trim() == '' || role_id.trim() == '' || csfrToken.trim() == '') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Complete todos los campos',
+        })
+    }else{
+        const url = 'create';
+        const data = {
+            name: name,
+            last_name: last_name,
+            email: email,
+            password: password,
+            role_id: role_id,
+            _token: csfrToken
+        }
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csfrToken
+            },
+            body: JSON.stringify(data)
+        }).then(response=>response.json())
+     .then(response=>{
+        Swal.fire({
+            position: "center",
+            icon: response.icon,
+            title: response.title,
+            showConfirmButton: false,
+            timer: 2000
+          });
+
+          redirigirVistaProd('/LARAVEL_CRUD/public/users');
+      });
+     
+    }
+}
+
+//editar prods
+window.updateUser = ()=>{
+
+    //datos
+    const user_uid = document.getElementById('user_uid').value;
+    const name = document.getElementById('name').value;
+    const last_name = document.getElementById('last_name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const role_id = document.getElementById('role_id').value;
+    const csfrToken = document.querySelector('input[name="_token"]').value;
+
+    //validacion
+    if(user_uid.trim()=='' || name.trim() == '' || last_name.trim() == '' || email.trim() == '' || password.trim() == '' || role_id.trim() == '' || csfrToken.trim() == '') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Complete todos los campos',
+        })
+    }else{
+        const url = user_uid;
+        const data = {
+            user_uid: user_uid,
+            name: name,
+            last_name: last_name,
+            email: email,
+            password: password,
+            role_id: role_id,
+            _token: csfrToken
+        }
+        
+
+        fetch(url, {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csfrToken
+            },
+            body: JSON.stringify(data)
+        }).then(response=>response.json())
+     .then(response=>{
+        Swal.fire({
+            position: "center",
+            icon: response.icon,
+            title: response.title,
+            showConfirmButton: false,
+            timer: 2000
+          });
+
+          redirigirVistaProd('/LARAVEL_CRUD/public/users');
       });
 
       

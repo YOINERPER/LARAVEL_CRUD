@@ -13,6 +13,7 @@ class Login
     {
         return view('login');
     }
+
     public function login(Request $request)
     {
         $mensaje = "";
@@ -42,5 +43,9 @@ class Login
                 return view('login', compact('mensaje'));
             }
         }
+    }
+
+    public function principal (){
+        return view('principal.index');
     }
 }

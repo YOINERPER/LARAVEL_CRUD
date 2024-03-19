@@ -35,22 +35,32 @@ class ProductoController
         $datos = request()->except('_token');
         $datos["prod_uid"] = uniqid();
 
-        if (trim($datos['prod_codigo']) == "" || trim($datos['prod_nombre']) == "" || trim($datos['prod_descripcion']) == "" || trim($datos['prod_precio']) == "" || trim($datos['prod_categoria']) == "") {
+        $campos = [
+            'prod_codigo' => 'required|string|max:20',
+            'prod_nombre' => 'required|string|max:20',
+            'prod_precio' => 'required|string',
+            'prod_descripcion' => 'required|string|max:100',
+            'prod_categoria' => 'required|string',
+        ];
 
-            echo json_encode(array("icon" => "warning", "title" => "Datos incompletos"));
+        $mensaje = [
+            'required' => ":attribute Campo obligatorio",
+            'prod_precio.required' => 'Precio debe ser numerico'
+        ];
+
+        $validateData = $request->validate($campos, $mensaje);
+
+
+        //verificamos que no exista el producto con el mismo codigo
+        $prodExist = Producto::where('prod_codigo', $datos['prod_codigo'])->first();
+
+        if ($prodExist) {
+            echo json_encode(array("icon" => "warning", "title" => "El codigo del producto ya se encuentra registrado"));
         } else {
 
-            //verificamos que no exista el producto con el mismo codigo
-            $prodExist = Producto::where('prod_codigo', $datos['prod_codigo'])->first();
+            Producto::create($datos);
 
-            if ($prodExist) {
-                echo json_encode(array("icon" => "warning", "title" => "El codigo del producto ya se encuentra registrado"));
-            } else {
-
-                $inserted = Producto::create($datos);
-
-                echo json_encode(array("icon" => "success", "title" => "Producto creado con exito"));
-            }
+            echo json_encode(array("icon" => "success", "title" => "Producto creado con exito"));
         }
     }
 
@@ -69,7 +79,7 @@ class ProductoController
     {
         $producto = Producto::where('prod_uid', $id)->first();
         $categorias = Categoria::all();
-        return view('productos.frmEdit', compact('categorias','producto'));
+        return view('productos.frmEdit', compact('categorias', 'producto'));
     }
 
     /**
@@ -77,26 +87,35 @@ class ProductoController
      */
     public function update(Request $request, $pro_uid)
     {
-    
+
         $datos = request()->except('_token');
 
+        $campos = [
+            'prod_codigo' => 'required|string|max:20',
+            'prod_nombre' => 'required|string|max:20',
+            'prod_precio' => 'required|string',
+            'prod_descripcion' => 'required|string|max:100',
+            'prod_categoria' => 'required|string',
+        ];
 
-        if (trim($datos['prod_codigo']) == "" || trim($datos['prod_nombre']) == "" || trim($datos['prod_descripcion']) == "" || trim($datos['prod_precio']) == "" || trim($datos['prod_categoria']) == "") {
+        $mensaje = [
+            'required' => ":attribute Campo obligatorio",
+            'prod_precio.required' => 'Precio debe ser numerico'
+        ];
 
-            echo json_encode(array("icon" => "warning", "title" => "Datos incompletos"));
+        $validateData = $request->validate($campos, $mensaje);
+
+
+        //verificamos que exista el producto con el mismo codigo
+        $prodExist = Producto::where('prod_uid', $pro_uid)->first();
+
+        if ($prodExist == null) {
+            echo json_encode(array("icon" => "warning", "title" => "El producto no existe"));
         } else {
 
-            //verificamos que exista el producto con el mismo codigo
-            $prodExist = Producto::where('prod_uid', $pro_uid)->first();
-            
-            if ($prodExist == null) {
-                echo json_encode(array("icon" => "warning", "title" => "El producto no existe"));
-            } else {
+            $updated = Producto::where('prod_uid', $pro_uid)->update($datos);
 
-                $updated = Producto::where('prod_uid', $pro_uid)->update($datos);
-
-                echo json_encode(array("icon" => "success", "title" => "Producto actualizado con exito"));
-            }
+            echo json_encode(array("icon" => "success", "title" => "Producto actualizado con exito"));
         }
     }
 
