@@ -8,7 +8,7 @@ use App\Models\Usuario;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/login',[Login::class, 'frmLogin']);
+Route::get('/',[Login::class, 'frmLogin']);
 Route::post('/login',[Login::class, 'login']);
 Route::get('/principal',[Login::class, 'principal']);
 
@@ -28,6 +28,7 @@ Route::get('/users/create',[UsuarioController::class, 'create']);
 Route::post('/users/create',[UsuarioController::class, 'store']);
 Route::get('/users/edit/{id}',[UsuarioController::class, 'edit']);
 Route::put('/users/edit/{id}',[UsuarioController::class, 'update']);
+Route::post('/users/edit/photo',[UsuarioController::class, 'imgUpdate']);
 
 
 

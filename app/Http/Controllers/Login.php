@@ -31,9 +31,11 @@ class Login
             $password = $datos['password'];
             $usuario = Usuario::where('email', $email)->Where('password', $password)->join('roles', 'usuarios.role_id', '=', 'roles.id')->first();
             if ($usuario) {
-                session(['name' => $usuario['name'], 'user_uid' => $usuario['user_uid'], 'rol_name' => $usuario['rol_name']]); //guardamos los datos del usuario
+                session(['name' => $usuario['name'], 'user_uid' => $usuario['user_uid'], 'rol_name' => $usuario['rol_name'], 'user_fot'=>$usuario['user_fot']]); //guardamos los datos del usuario
                 if ($usuario) {
-                    return view('principal.index');
+                    $user_uid = $usuario['user_uid'];
+                    $imagenPerfil = $usuario['user_fot'];
+                    return view('principal.index', compact('user_uid','imagenPerfil'));
                 } else {
                     $mensaje = 2;
                     return view('login', compact('mensaje'));
@@ -46,6 +48,13 @@ class Login
     }
 
     public function principal (){
-        return view('principal.index');
+        if(session('user_uid')){
+            $user_uid = session('user_uid');
+            $imagenPerfil = session('user_fot');
+            return view('principal.index', compact('user_uid', 'imagenPerfil'));
+        }else{
+            return view('/');
+        }
+
     }
 }

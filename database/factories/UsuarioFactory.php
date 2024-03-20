@@ -21,6 +21,7 @@ class UsuarioFactory extends Factory
             'name' => $this->faker->name(),
             'last_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
+            'user_fot' => $this->faker->url(),
             'password' => sha1("1234567890"),
             'role_id' => $this->faker->randomElement([1,2,3]),
         ];

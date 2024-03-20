@@ -32,11 +32,11 @@ class UsuarioController
      */
     public function store(Request $request)
     {
-        
+
         $datos = request()->except('_token');
         $datos["user_uid"] = uniqid();
         $datos['password'] = sha1($datos['password']);
-       
+
 
         $campos = [
             'name' => 'required|string|max:20',
@@ -60,7 +60,7 @@ class UsuarioController
         if ($prodExist) {
             echo json_encode(array("icon" => "warning", "title" => "Email is already registered"));
         } else {
-           
+
             usuario::insert($datos);
 
             echo json_encode(array("icon" => "success", "title" => "Success created"));
@@ -112,7 +112,7 @@ class UsuarioController
 
         //verificamos que exista el usuario con el mismo codigo
         $userexist = usuario::where('user_uid', $user_uid)->first();
-        
+
         if ($userexist == null) {
             echo json_encode(array("icon" => "warning", "title" => "El usuario no existe"));
         } else {
@@ -135,5 +135,18 @@ class UsuarioController
             echo json_encode(array("icon" => "success", "title" => "Producto eliminado"));
         }
         //
+    }
+
+    public function imgUpdate(Request $request){
+        $datos = request()->except('_token');
+        $user_uid = $datos['user_uid'];
+        $imagen = $datos['image'];
+        $imageName = time().'.'.$imagen->getClientOriginalExtension();
+        $imagen->storeAs('public/', $imageName);
+
+        usuario::where('user_uid', $datos['user_uid'])->update(["user_fot" => $imageName]);
+
+        $imagenPerfil = $imageName;
+        return view('principal.index', compact('user_uid', 'imagenPerfil'));
     }
 }

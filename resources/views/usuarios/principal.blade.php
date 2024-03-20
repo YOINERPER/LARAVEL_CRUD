@@ -1,5 +1,6 @@
 @extends('layouts.plantilla')
 
+
 @section('user_name', session('name'))
 
 @section('usu_rol', session('rol_name'))
@@ -34,7 +35,7 @@
                                 <button onclick="deleteProd({{$user->user_uid}},this, 'users')" class="bg-red-500 text-white py-1 mx-1 px-2 rounded-md" type="submit"><i
                                     class="fa-solid fa-trash"></i></button>
                             </form>
-                            
+
 
                         </td>
                     </tr>
@@ -47,6 +48,6 @@
         </div>
 
     </div>
-    
+
 
 @endsection
